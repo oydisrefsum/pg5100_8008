@@ -2,6 +2,7 @@ package org.tsdes.backend.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+/*
 
 @Entity
 @Table(name="PURCHASE")
@@ -53,3 +54,4 @@ public class Purchase {
         this.dateBooked = dateBooked;
     }
 }
+*/

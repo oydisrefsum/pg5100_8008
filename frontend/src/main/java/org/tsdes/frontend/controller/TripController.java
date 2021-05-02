@@ -1,4 +1,5 @@
 package org.tsdes.frontend.controller;
+/*
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tsdes.backend.entity.Purchase;
@@ -87,3 +88,4 @@ public class TripController implements Serializable {
         return tripService.getAllPurchases(infoController.getUserName());
     }
 }
+*/

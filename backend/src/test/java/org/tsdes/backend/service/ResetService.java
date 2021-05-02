@@ -23,8 +23,8 @@ public class ResetService {
         //Have to use native SQL for ElementCollection
 
         deleteEntities(User.class);
-        deleteEntities(Trip.class);
-        deleteEntities(Purchase.class);
+/*        deleteEntities(Trip.class);
+        deleteEntities(Purchase.class);*/
     }
 
     private void deleteEntities(Class<?> entity){

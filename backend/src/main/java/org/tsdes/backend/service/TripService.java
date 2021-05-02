@@ -1,5 +1,5 @@
 package org.tsdes.backend.service;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,8 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
+import java.util.List;*/
+/*
 
 @Service
 @Transactional
@@ -97,3 +98,4 @@ public class TripService {
 
 
 }
+*/

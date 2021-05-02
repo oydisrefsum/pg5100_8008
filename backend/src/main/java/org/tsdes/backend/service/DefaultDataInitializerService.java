@@ -20,20 +20,20 @@ public class DefaultDataInitializerService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private TripService tripService;
+   /* @Autowired
+    private TripService tripService;*/
 
     @PostConstruct
     public void initialize(){
 
         attempt(() -> userService.createUser("foo", "foo", "bar", "foo@bar.com", "123"));
-        attempt(() -> tripService.createTrip("Paris", "Fly to paris", 4999, "France", LocalDate.of(2022, Month.JANUARY, 13)));
+        /*attempt(() -> tripService.createTrip("Paris", "Fly to paris", 4999, "France", LocalDate.of(2022, Month.JANUARY, 13)));
         attempt(() -> tripService.createTrip("Milano", "Fly to milano", 2599, "Italy", LocalDate.of(2022, Month.FEBRUARY, 12)));
         attempt(() -> tripService.createTrip("Cos", "Fly to cos", 1299, "Greece", LocalDate.of(2023, Month.MARCH, 11)));
         attempt(() -> tripService.createTrip("Nice", "Fly to nice", 1999, "France", LocalDate.of(2022, Month.APRIL, 10)));
         attempt(() -> tripService.createTrip("Sweden", "Fly to sweden", 6049, "Sweden", LocalDate.of(2022, Month.MAY, 9)));
         attempt(() -> tripService.createTrip("Rhodes", "Fly rhodes", 2099, "Greece", LocalDate.of(2022, Month.JUNE, 8)));
-
+*/
         /*Long ctgSE = attempt(() -> categoryService.createCategory("Software Engineering"));
         Long ctgH = attempt(() -> categoryService.createCategory("History"));
 

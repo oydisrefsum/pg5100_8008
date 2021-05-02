@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
+/*
 
 @Entity
 @Table(name="TRIP")
@@ -82,3 +83,4 @@ public class Trip {
         this.location = location;
     }
 }
+*/

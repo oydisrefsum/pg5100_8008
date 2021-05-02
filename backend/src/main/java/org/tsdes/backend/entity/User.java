@@ -26,9 +26,9 @@ public class User {
 
     @NotNull
     private Boolean enabled;
-
+/*
     @OneToMany(mappedBy = "user")
-    private List<Purchase> purchases;
+    private List<Purchase> purchases;*/
 
 
     public User() {
