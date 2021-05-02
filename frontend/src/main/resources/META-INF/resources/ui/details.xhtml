@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Details
+    </ui:define>
+
+
+    <ui:define name="content">
+
+
+
+        <h2>Details</h2>
+
+        <div id="details">
+        <p>Details about #{tripController.currentTrip.title}</p>
+            <p>#{tripController.currentTrip.description}</p>
+            <p>Price: #{tripController.currentTrip.cost}</p>
+            <p>Date of departure: #{tripController.currentTrip.dateOfDeparture}</p>
+            <p>Location: #{tripController.currentTrip.location}</p>
+        </div>
+
+        <h1>Book trip!</h1>
+        <h:form id="createForm">
+        <h:commandButton value="Book now!" action="#{tripController.bookTrip}" id="createButton"/>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:sec="http://www.springframework.org/security/tags"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+>
+
+<ui:composition template="/layout.xhtml">
+
+    <ui:define name="title">
+        Travel Guide
+    </ui:define>
+
+
+    <ui:define name="content">
+
+        <h2>Travel Guide</h2>
+
+        <h6>Search by location, sorted by least expencive to most expencive</h6>
+        <h:form id="createForm">
+            <h:inputTextarea value="#{tripController.formText}" id="createText"/>
+            <h:commandButton value="Search!" action="#{tripController.setSearchedTrips}" id="createButton"/>
+        </h:form>
+
+        <c:if test="#{tripController.getSearchedTrips().size() == 0}">
+            <h3>No searched match this result</h3>
+        </c:if>
+
+        <c:forEach var="trip" items="#{tripController.getSearchedTrips()}">
+            <div id="search">
+            <p>#{trip.title}</p>
+            <p>#{trip.location}</p>
+            <p>#{trip.cost}</p>
+            </div>
+        </c:forEach>
+
+        <p>Top 5 travel Destinations</p>
+
+        <c:forEach var="trip" items="#{tripController.getTrips(5)}">
+            <h:form prependId="false">
+                <h:commandButton action="#{tripController.details(trip.id)}"
+                        value="#{trip.title}"
+                        class="travels"/>
+                <p>#{trip.description}</p>
+                <p>Price: #{trip.cost}</p>
+                <p>DepartureTime: #{trip.dateOfDeparture}</p>
+                <p>Location: #{trip.location}</p>
+            </h:form>
+
+            <sec:authenticated>
+
+                <p>Book your trip today!</p>
+
+            </sec:authenticated>
+        </c:forEach>
+
+        <sec:anonymous>
+            Log in to book your new destination!
+        </sec:anonymous>
+
+    </ui:define>
+
+</ui:composition>
+</html>
