@@ -5,6 +5,9 @@ start application from LocalRunnerApplication found in frontend/src/test/java/or
 ###Using code from github repo
 https://github.com/arcuri82/testing_security_development_enterprise_systems
 
+//File copied from repo https:
+//github.com/arcuri82/testing_
+security_development_enterprise_systems
 ###Briefly discuss solution:
 
 ###Not completed:

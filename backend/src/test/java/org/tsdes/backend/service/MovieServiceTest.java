@@ -1,15 +1,12 @@
 package org.tsdes.backend.service;
-/*
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.backend.StubApplication;
-import org.tsdes.backend.entity.Trip;
-import org.tsdes.backend.entity.User;
+import org.tsdes.backend.entity.Movie;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -20,25 +17,28 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = StubApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class TripServiceTest extends ServiceTestBase{
+public class MovieServiceTest extends ServiceTestBase {
 
     @Autowired
-    private TripService tripService;
+    private MovieService movieService;
 
-    @Autowired UserService userService;
+    @Autowired
+    UserService userService;
 
     @Test
     public void testNoExistingTrips() {
 
-        List<Trip> list = tripService.getAllTrips();
+        List<Movie> list = movieService.getAllMovies();
         assertEquals(0, list.size());
     }
+
     @Test
-    public void testCreateTrip(){
-        Long tripId = tripService.createTrip("Paris", "Fly", 3999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        assertNotNull(tripId);
+    public void testCreateMovie(){
+        Long movieId = movieService.createMovie("IT", "Steven Spielberg", LocalDate.of(2012, Month.MAY, 15));
+        assertNotNull(movieId);
     }
 
+/*
     @Test
     public void testDeleteTrip(){
         Long tripId = tripService.createTrip("Paris", "Fly", 3999, "Paris", LocalDate.of(2022, Month.MAY, 15));
@@ -107,5 +107,6 @@ public class TripServiceTest extends ServiceTestBase{
 
         assertNotNull(purchaseId);
     }
+
+ */
 }
-*/

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
+//File copied and adapted from repo https://github.com/arcuri82/testing_security_development_enterprise_systems
 /**
  * Created by arcuri82 on 14-Dec-17.
  */
@@ -23,6 +23,8 @@ public class ResetService {
         //Have to use native SQL for ElementCollection
 
         deleteEntities(User.class);
+        deleteEntities(Movie.class);
+        deleteEntities(Review.class);
 /*        deleteEntities(Trip.class);
         deleteEntities(Purchase.class);*/
     }

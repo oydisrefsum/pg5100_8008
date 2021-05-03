@@ -10,7 +10,7 @@ import org.tsdes.backend.StubApplication;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_CLASS;
-
+//File copied from repo https://github.com/arcuri82/testing_security_development_enterprise_systems
 /**
  * Created by arcuri82 on 15-Dec-17.
  */
@@ -25,8 +25,8 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFOR
 @DirtiesContext(classMode = BEFORE_CLASS)
 public class DefaultDataInitializerServiceTest {
 
-    /*@Autowired
-    private TripService tripService;*/
+    @Autowired
+    private MovieService movieService;
 
     @Autowired
     private UserService userService;
@@ -34,7 +34,7 @@ public class DefaultDataInitializerServiceTest {
     @Test
     public void testInit() {
 
-       /* assertTrue(tripService.getAllTrips().size() > 0);*/
+        assertTrue(movieService.getAllMovies().size() > 0);
 
 
     }
