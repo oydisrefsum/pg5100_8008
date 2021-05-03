@@ -35,11 +35,6 @@ public class MovieService {
         return movie.getId();
     }
 
-    public Long createMovieWithMovie(Movie movie){
-        em.persist(movie);
-        return movie.getId();
-    }
-
     public void deleteMovie(Long id){
 
         Movie movie = em.find(Movie.class, id);
@@ -85,17 +80,21 @@ public class MovieService {
         for(Review review : query.getResultList()){
             stars += review.getStars();
         }
+        if(query.getResultList().size() == 0){
+            return 0;
+        }
         return (stars/query.getResultList().size());
 
     }
 
     public List<Movie> getMoviesByStars(){
         TypedQuery<Review> query = em.createQuery(
-                "SELECT r FROM Review r ORDER BY r.stars ASC", Review.class);
+                "SELECT r FROM Review r ORDER BY r.stars desc ", Review.class);
 
         List<Movie> movies = new ArrayList<>();
         for(Review review : query.getResultList()){
             movies.add(review.getMovie());
+            System.out.println(review.getMovie().getTitle());
         }
         return movies;
     }

@@ -27,8 +27,13 @@ public class User {
     @NotNull
     private Boolean enabled;
 
-    @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "REVIEW",
+            joinColumns = {@JoinColumn(name = "user_username")},
+            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
+    )
+    private List<Movie> movies;
 
 
     public User() {
@@ -83,11 +88,4 @@ public class User {
         this.email = email;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }

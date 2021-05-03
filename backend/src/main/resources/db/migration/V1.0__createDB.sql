@@ -15,9 +15,17 @@ create table movie(
     title varchar(255) not null,
     director varchar(255) not null,
     date_of_release date not null,
-
     primary key(id)
 );
+
+/*create table movie_users(
+    users_username varchar(255) not null,
+    movie_id bigint not null
+);
+create table user_movies(
+   user_username varchar(255) not null,
+   movies_id bigint not null
+);*/
 
 create table review
 (
@@ -25,15 +33,13 @@ create table review
     movie_id bigint not null,
     review varchar(255) not null,
     date_written date not null,
-    stars integer not null check (stars>=1 AND stars<=5),
     user_username varchar(255) not null,
+    stars integer not null check (stars<= 5 AND stars>=1),
     primary key (id)
 );
 
-/*alter table purchase add constraint FKlq0qkm58rh351bb84y4o5c447 foreign key (user_username) references user;
-alter table purchase add constraint FKe537pv7sahdo44b6y2lajtge1 foreign key (trip_id) references trip;
-alter table trip_users add constraint FKqchb6i03kpgj2gnq4xhmkydxc foreign key (users_username) references user;
-alter table trip_users add constraint FKcrnfc5k5lxdfurq3b97o52dnv foreign key (trip_id) references trip;
-alter table user_trips add constraint UK_812qgr2woxiu6e0776qiioy12 foreign key (user_username) references user;
-alter table user_trips add constraint FK6qbykpe0c8j68iwgm77hjtvhp foreign key (trips_id) references trip;
-*/
+/*alter table movie_users add constraint FKqchb6i03kpgj2gnq4xhmkydxc foreign key (users_username) references user;
+alter table movie_users add constraint FKcrnfc5k5lxdfurq3b97o52dnv foreign key (movie_id) references movie;
+alter table user_movies add constraint UK_812qgr2woxiu6e0776qiioy12 foreign key (user_username) references user;
+alter table user_movies add constraint FK6qbykpe0c8j68iwgm77hjtvhp foreign key (movies_id) references movie;*/
+

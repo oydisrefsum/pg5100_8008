@@ -26,8 +26,8 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-    @OneToMany(mappedBy = "movie")
-    private List<Review> reviews;
+    @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<User> users;
 
     public String getTitle() {
         return title;
@@ -62,12 +62,5 @@ public class Movie {
         this.dateOfRelease = dateOfRelease;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }
 

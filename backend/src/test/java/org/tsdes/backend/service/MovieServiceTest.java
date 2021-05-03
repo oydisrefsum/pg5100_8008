@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.tsdes.backend.StubApplication;
 import org.tsdes.backend.entity.Movie;
+import org.tsdes.backend.entity.Review;
+import org.tsdes.backend.entity.User;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -38,75 +40,105 @@ public class MovieServiceTest extends ServiceTestBase {
         assertNotNull(movieId);
     }
 
-/*
+
     @Test
-    public void testDeleteTrip(){
-        Long tripId = tripService.createTrip("Paris", "Fly", 3999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        assertTrue(tripService.getAllTrips().size() > 0);
+    public void testDeleteMovie(){
+        Long movieId = movieService.createMovie("IT", "Steven Spielberg", LocalDate.of(2012, Month.MAY, 15));
+        assertTrue(movieService.getAllMovies().size() > 0);
 
-        tripService.deleteTrip(tripId);
+        movieService.deleteMovie(movieId);
 
-        assertFalse(tripService.getAllTrips().size() > 0);
+        assertFalse(movieService.getAllMovies().size() > 0);
     }
     @Test
-    public void testDeleteTripWithWrongId(){
-        Long tripId = tripService.createTrip("Paris", "Fly", 3999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        assertTrue(tripService.getAllTrips().size() > 0);
+    public void testDeleteMovieWithWrongId(){
+        Long movieId = movieService.createMovie("IT", "Steven Spielberg", LocalDate.of(2012, Month.MAY, 15));
+        assertTrue(movieService.getAllMovies().size() > 0);
 
-        assertThrows(IllegalArgumentException.class, () -> tripService.deleteTrip(4L) );
-    }
-
-    @Test
-    public void testGetAllTripsByCost(){
-        Long tripId = tripService.createTrip("Paris", "Fly", 3999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        Long tripId1 = tripService.createTrip("Paris1", "Fly", 2999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        Long tripId2 = tripService.createTrip("Paris2", "Fly", 6999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        Long tripId3 = tripService.createTrip("Paris3", "Fly", 1999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-
-        List<Trip> trips = tripService.getAllTripsByCost();
-
-        assertEquals(trips.get(0).getCost(),1999);
-        assertEquals(trips.get(3).getCost(), 6999);
+        assertThrows(IllegalArgumentException.class, () -> movieService.deleteMovie(4L) );
     }
     @Test
-    public void testGetAllTripsByCostWithLocation(){
-        Long tripId = tripService.createTrip("test", "Fly", 33999, "Paris", LocalDate.of(2022, Month.MAY, 15));
-        Long tripId1 = tripService.createTrip("test1", "Fly", 42999, "Greece", LocalDate.of(2022, Month.MAY, 15));
-        Long tripId2 = tripService.createTrip("test2", "Fly", 51999, "USA", LocalDate.of(2022, Month.MAY, 15));
-        Long tripId3 = tripService.createTrip("test3", "Fly", 13999, "Paris", LocalDate.of(2022, Month.MAY, 15));
+    public void testGetAllMovies(){
+        Long movieId1 = movieService.createMovie("IT", "Steven Spielberg", LocalDate.of(2012, Month.MAY, 15));
+        Long movieId2 = movieService.createMovie("Ready Player One", "Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+        Long movieId3 = movieService.createMovie("SVK", "Steven Spielberg", LocalDate.of(2016, Month.JUNE, 25));
 
-        List<Trip> trips = tripService.getAllTripsBylocation("Paris");
-
-        assertEquals(13999,trips.get(0).getCost());
-        assertEquals(33999, trips.get(1).getCost());
-        assertEquals(2, trips.size());
-        assertEquals("Paris", trips.get(0).getLocation());
+        assertEquals(3, movieService.getAllMovies().size());
     }
 
     @Test
-    public void testBookATrip(){
-        User user = new User();
-        user.setEmail("e@mail.com");
-        user.setLastname("last");
-        user.setFirstname("first");
-        user.setUsername("ownrenwiboqnfonw");
-        user.setPassword("password");
-        user.setEnabled(true);
+    public void testCreateMovieWithMovie(){
+        Long movieId = movieService.createMovie("Ready Player One","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
 
-        Trip trip = new Trip();
-        trip.setDateOfDeparture(LocalDate.of(2022, Month.MAY, 15));
-        trip.setCost(200);
-        trip.setDescription("knff3");
-        trip.setTitle("trip");
-        trip.setLocation("Malaga");
+        assertNotNull(movieId);
+    }
 
-//brukeren og trippen måtte være i systemet før man kunne booke en tur
-        tripService.createTripWithTrip(trip);
+    @Test
+    public void testAverageStars(){
+        Long movieId = movieService.createMovie("Ready Player One","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        Movie movie = movieService.getMovieWithId(movieId);
+        User user = getUser();
         userService.creatUserWithUser(user);
-        Long purchaseId = tripService.bookATrip(user,trip);
 
-        assertNotNull(purchaseId);
+        movieService.rateAMovie(movie, user, "not good", 1, LocalDate.of(2016, Month.JUNE, 25));
+
+        movieService.rateAMovie(movie, user, "very good", 5, LocalDate.of(2016, Month.JUNE, 25));
+
+        assertEquals(3,movieService.averageStars(movieId));
     }
 
- */
+    @Test
+    public void testAverageStarsForMovieWithoutReview(){
+        Long movieId = movieService.createMovie("Ready Player One","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        assertEquals(0,movieService.averageStars(movieId));
+    }
+
+    private User getUser() {
+        User user = new User();
+        user.setEnabled(true);
+        user.setUsername("username");
+        user.setFirstname("user");
+        user.setLastname("name");
+        user.setPassword("1234");
+        user.setEmail("user@name.com");
+        return user;
+    }
+
+    @Test
+    public void testGetMoviesByStars(){
+        Long movieId = movieService.createMovie("Ready Player One","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        Movie movie = movieService.getMovieWithId(movieId);
+
+        Long movieId1 = movieService.createMovie("Ready Player Five","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        Movie movie1 = movieService.getMovieWithId(movieId1);
+
+        Long movieId2 = movieService.createMovie("Ready Player Four","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        Movie movie2 = movieService.getMovieWithId(movieId2);
+
+        Long movieId3 = movieService.createMovie("Ready Player Two","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        Movie movie3 = movieService.getMovieWithId(movieId3);
+
+        User user = getUser();
+        userService.creatUserWithUser(user);
+
+        movieService.rateAMovie(movie1, user, "excellent", 5, LocalDate.of(2016, Month.JUNE, 25));
+        movieService.rateAMovie(movie, user, "very bad", 1, LocalDate.of(2016, Month.JUNE, 25));
+        movieService.rateAMovie(movie2, user, "very good", 4, LocalDate.of(2016, Month.JUNE, 25));
+        movieService.rateAMovie(movie3, user, "not very good", 2, LocalDate.of(2016, Month.JUNE, 25));
+
+
+        List<Movie> movies = movieService.getMoviesByStars();
+
+        System.out.println(movies.size());
+
+        assertEquals(5, movieService.averageStars(movies.get(0).getId()));
+        assertEquals(1, movieService.averageStars(movies.get(3).getId()));
+    }
+
 }
