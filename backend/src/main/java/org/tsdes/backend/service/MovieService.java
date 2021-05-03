@@ -101,7 +101,7 @@ public class MovieService {
 
     public List<Review> getReviewsSortedByStars(Long movieId){
         TypedQuery<Review> query = em.createQuery(
-                "SELECT r FROM Review r where r.movie.id=?1 ORDER BY r.stars ASC", Review.class);
+                "SELECT r FROM Review r where r.movie.id=?1 ORDER BY r.stars DESC", Review.class);
         query.setParameter(1, movieId);
 
         return query.getResultList();

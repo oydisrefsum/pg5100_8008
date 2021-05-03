@@ -141,4 +141,27 @@ public class MovieServiceTest extends ServiceTestBase {
         assertEquals(1, movieService.averageStars(movies.get(3).getId()));
     }
 
+    @Test
+    public void getReviewsSortedByStars(){
+
+        Long movieId = movieService.createMovie("Ready Player One","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
+
+        Movie movie = movieService.getMovieWithId(movieId);
+
+
+        User user = getUser();
+        userService.creatUserWithUser(user);
+
+        movieService.rateAMovie(movie, user, "excellent", 5, LocalDate.of(2016, Month.JUNE, 25));
+        movieService.rateAMovie(movie, user, "very bad", 1, LocalDate.of(2016, Month.JUNE, 25));
+        movieService.rateAMovie(movie, user, "very good", 4, LocalDate.of(2016, Month.JUNE, 25));
+        movieService.rateAMovie(movie, user, "not very good", 2, LocalDate.of(2016, Month.JUNE, 25));
+
+        List<Review> reviews = movieService.getReviewsSortedByStars(movieId);
+
+        assertEquals(5, reviews.get(0).getStars());
+        assertEquals(1, reviews.get(3).getStars());
+
+    }
+
 }
