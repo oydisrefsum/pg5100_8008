@@ -112,5 +112,13 @@ public class MovieService {
         return query.getResultList();
     }
 
+    public List<Review> getReviewSortedByDate(Long movieId){
+        TypedQuery<Review> query = em.createQuery(
+                "SELECT r FROM Review r where r.movie.id=?1 ORDER BY r.dateWritten DESC", Review.class);
+        query.setParameter(1, movieId);
+
+        return query.getResultList();
+    }
+
 }
 
