@@ -20,28 +20,33 @@
 
         <h2>Details</h2>
 
-        <div id="details">
+        <div class="details">
         <p>Details about #{movieController.currentMovie.title}</p>
             <p>Director: #{movieController.currentMovie.director}</p>
             <p>Date of release: #{movieController.currentMovie.dateOfRelease}</p>
-            <c:forEach var="review" items="#{movieController.getReviewsSortByStars(movieController.currentMovie.id)}">
-                <p>Stars: #{review.stars}</p>
-                <p>Review: #{review.review}</p>
-                <p>Author: #{review.user.username}</p>
-                <p>Date reviewed: #{review.dateWritten}</p>
-            </c:forEach>
-            <c:forEach var="review" items="#{movieController.getReviewsSortByDate(movieController.currentMovie.id)}">
+            <h:form id="createForm">
+                <h:commandButton value="See Reviews rated by stars" action="#{movieController.setSeeByStars}" styleClass="btn"/>
+            </h:form>
+            <h:form id="createFormm">
+                <h:commandButton value="See Reviews rated by date written" action="#{movieController.setSeeByDate}" styleClass="btn"/>
+            </h:form>
+            <c:forEach var="review" items="#{movieController.getReview(movieController.currentMovie.id)}">
                 <p>Stars: #{review.stars}</p>
                 <p>Review: #{review.review}</p>
                 <p>Author: #{review.user.username}</p>
                 <p>Date reviewed: #{review.dateWritten}</p>
             </c:forEach>
         </div>
-<!--
-        <h1>Book trip!</h1>
-        <h:form id="createForm">
-        <h:commandButton value="Book now!" action="#{tripController.bookTrip}" id="createButton"/>
-        </h:form>-->
+
+        <div class="details">
+            <h3>Add your own review</h3>
+            <h:form id="createForms">
+                <p>Text: </p><h:inputTextarea value="#{movieController.reviewText}" id="createText"/>
+                <p>Stars: </p><h:inputTextarea value="#{movieController.stars}" id="createTextt"/>
+                <h:commandButton value="Give your review!" action="#{movieController.addAReview}" styleClass="btn"/>
+            </h:form>
+        </div>
+
 
     </ui:define>
 
