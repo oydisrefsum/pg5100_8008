@@ -32,6 +32,11 @@ public class MovieController implements Serializable {
         return movieService.getAllMovies();
     }
 
+    public String getAverageStars(Long movieId) {
+
+        return movieService.averageStars(movieId);
+    }
+
 /*
     private List<Trip> trips;
 

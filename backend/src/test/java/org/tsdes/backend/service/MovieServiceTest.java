@@ -85,14 +85,14 @@ public class MovieServiceTest extends ServiceTestBase {
 
         movieService.rateAMovie(movie, user, "very good", 5, LocalDate.of(2016, Month.JUNE, 25));
 
-        assertEquals(3,movieService.averageStars(movieId));
+        assertEquals("3",movieService.averageStars(movieId));
     }
 
     @Test
     public void testAverageStarsForMovieWithoutReview(){
         Long movieId = movieService.createMovie("Ready Player One","Steven Spielberg", LocalDate.of(2018, Month.JULY, 10));
 
-        assertEquals(0,movieService.averageStars(movieId));
+        assertEquals("This movie has no reviews yet",movieService.averageStars(movieId));
     }
 
     private User getUser() {
@@ -137,8 +137,8 @@ public class MovieServiceTest extends ServiceTestBase {
 
         System.out.println(movies.size());
 
-        assertEquals(5, movieService.averageStars(movies.get(0).getId()));
-        assertEquals(1, movieService.averageStars(movies.get(3).getId()));
+        assertEquals("5", movieService.averageStars(movies.get(0).getId()));
+        assertEquals("1", movieService.averageStars(movies.get(3).getId()));
     }
 
     @Test

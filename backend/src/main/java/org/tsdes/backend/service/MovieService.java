@@ -76,7 +76,7 @@ public class MovieService {
         return review.getId();
     }
 
-    public Integer averageStars(Long id){
+    public String averageStars(Long id){
         TypedQuery<Review> query = em.createQuery(
                 "SELECT r FROM Review r WHERE r.movie.id=?1", Review.class);
         query.setParameter(1, id);
@@ -85,9 +85,10 @@ public class MovieService {
             stars += review.getStars();
         }
         if(query.getResultList().size() == 0){
-            return 0;
+            return "This movie has no reviews yet";
         }
-        return (stars/query.getResultList().size());
+        int average = (stars/query.getResultList().size());
+        return Integer.toString(average);
 
     }
 

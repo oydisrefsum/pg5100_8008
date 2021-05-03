@@ -23,6 +23,7 @@
                 <p>#{movie.title}</p>
                 <p>#{movie.director}</p>
                 <p>#{movie.dateOfRelease}</p>
+                <p>#{movieController.getAverageStars(movie.id)}</p>
             </div>
         </c:forEach>
 
@@ -66,7 +67,7 @@
 
         <sec:anonymous>
             <br/>
-            Log in to book your new destination!
+            Log in to review your next movie!
         </sec:anonymous>
 
     </ui:define>
