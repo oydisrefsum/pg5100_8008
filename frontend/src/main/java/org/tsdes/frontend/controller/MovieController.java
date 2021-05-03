@@ -79,6 +79,13 @@ public class MovieController implements Serializable {
     public void addAReview(){
 
         User user = userService.getUserWithId(infoController.getUserName());
+//check here for info om brukeren har reviewet filmen før
+
+        for (Review review : movieService.getReviewSortedByDate(currentMovie.getId())){
+            if(review.getUser().getUsername().equals(user.getUsername())){
+                System.out.println("this user ha already reviewed this movie");
+            }
+        }
 
         movieService.rateAMovie(currentMovie, user, reviewText, parseInt(stars), LocalDate.now());
     }
