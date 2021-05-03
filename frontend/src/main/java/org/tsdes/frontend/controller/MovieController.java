@@ -3,14 +3,13 @@ package org.tsdes.frontend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.tsdes.backend.entity.Movie;
-import org.tsdes.backend.entity.User;
+import org.tsdes.backend.entity.Review;
 import org.tsdes.backend.service.MovieService;
 import org.tsdes.backend.service.UserService;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -41,6 +40,14 @@ public class MovieController implements Serializable {
         currentMovie = movieService.getMovieWithId(id);
 
         return "/ui/details.jsf?faces-redirect=true";
+    }
+
+    public List<Review> getReviews(Long movieId){
+        return movieService.getReviewsSortedByStars(movieId);
+    }
+
+    public Movie getCurrentMovie(){
+        return currentMovie;
     }
 
 

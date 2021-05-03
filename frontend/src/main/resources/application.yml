@@ -9,7 +9,7 @@ spring:
     database: h2
     show-sql: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
 
 
 

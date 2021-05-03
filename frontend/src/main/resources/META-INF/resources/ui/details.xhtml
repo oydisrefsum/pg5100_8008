@@ -18,16 +18,20 @@
 
 
 
-        <!--<h2>Details</h2>
+        <h2>Details</h2>
 
         <div id="details">
-        <p>Details about #{tripController.currentTrip.title}</p>
-            <p>#{tripController.currentTrip.description}</p>
-            <p>Price: #{tripController.currentTrip.cost}</p>
-            <p>Date of departure: #{tripController.currentTrip.dateOfDeparture}</p>
-            <p>Location: #{tripController.currentTrip.location}</p>
+        <p>Details about #{movieController.currentMovie.title}</p>
+            <p>Director: #{movieController.currentMovie.director}</p>
+            <p>Date of release: #{movieController.currentMovie.dateOfRelease}</p>
+            <c:forEach var="review" items="#{movieController.getReviews(movieController.currentMovie.id)}">
+                <p>Stars: #{review.stars}</p>
+                <p>Review: #{review.review}</p>
+                <p>Author: #{review.user.username}</p>
+                <p>Date reviewed: #{review.dateWritten}</p>
+            </c:forEach>
         </div>
-
+<!--
         <h1>Book trip!</h1>
         <h:form id="createForm">
         <h:commandButton value="Book now!" action="#{tripController.bookTrip}" id="createButton"/>
