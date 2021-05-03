@@ -26,9 +26,9 @@ public class User {
 
     @NotNull
     private Boolean enabled;
-/*
+
     @OneToMany(mappedBy = "user")
-    private List<Purchase> purchases;*/
+    private List<Review> reviews;
 
 
     public User() {
@@ -83,4 +83,11 @@ public class User {
         this.email = email;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 }

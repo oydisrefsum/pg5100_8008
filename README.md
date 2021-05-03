@@ -14,3 +14,8 @@ https://github.com/arcuri82/testing_security_development_enterprise_systems
 ###Tests
 
 ###Extras
+
+#CheckList before delivery
+
+* [] clean out all excessive commented out code
+* [] mark all files copied from repo as copied
