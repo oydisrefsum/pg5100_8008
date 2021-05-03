@@ -43,6 +43,7 @@ public class UserService {
 
         return true;
     }
+
     public String creatUserWithUser(User user){
         em.persist(user);
         return user.getUsername();

@@ -2,6 +2,8 @@ package org.tsdes.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tsdes.backend.entity.Movie;
+import org.tsdes.backend.entity.User;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
@@ -35,8 +37,21 @@ public class DefaultDataInitializerService {
         attempt(() -> movieService.createMovie("Lock, Stock, and Two Smoking Barrels", "Guy Richie", LocalDate.of(1999, Month.FEBRUARY, 26)));
         attempt(() -> movieService.createMovie("North by Northwest", "Alfred Hitchcock", LocalDate.of(1959, Month.JULY, 1)));
         attempt(() -> movieService.createMovie("Blue Velvet", "David Lynch", LocalDate.of(2007, Month.SEPTEMBER, 21)));
-        attempt(() -> movieService.createMovie("The Godfather", "Francis Ford Coppola", LocalDate.of(2007, Month.OCTOBER, 14)));
-        attempt(() -> movieService.createMovie("Lost in Translation", "Sofia Coppola", LocalDate.of(2003, Month.NOVEMBER, 3)));
+
+
+        Long id =  movieService.createMovie("The Godfather", "Francis Ford Coppola", LocalDate.of(2007, Month.OCTOBER, 14));
+        Long id2 = movieService.createMovie("Lost in Translation", "Sofia Coppola", LocalDate.of(2003, Month.NOVEMBER, 3));
+
+        User user = userService.getUserWithId("foo");
+
+        Movie movie1 = movieService.getMovieWithId(id);
+        Movie movie2 = movieService.getMovieWithId(id2);
+
+        attempt(() -> movieService.rateAMovie(movie1, user, "Very Good movie", 4, LocalDate.of(2017, Month.OCTOBER, 13)));
+        attempt(() -> movieService.rateAMovie(movie2, user, "Very Bad movie", 1, LocalDate.of(2013, Month.APRIL, 13)));
+
+
+
 
     }
 

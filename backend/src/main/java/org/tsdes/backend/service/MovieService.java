@@ -65,10 +65,11 @@ public class MovieService {
         return query.getResultList();
     }
 
-    public Long rateAMovie(Movie movie, User user, String text, Integer stars){
+    public Long rateAMovie(Movie movie, User user, String text, Integer stars, LocalDate dateWritten){
         Review review = new Review();
         review.setMovie(movie);
         review.setUser(user);
+        review.setDateWritten(dateWritten);
         review.setReview(text);
         review.setStars(stars);
 
