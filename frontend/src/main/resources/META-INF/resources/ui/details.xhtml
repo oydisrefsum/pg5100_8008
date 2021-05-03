@@ -24,7 +24,13 @@
         <p>Details about #{movieController.currentMovie.title}</p>
             <p>Director: #{movieController.currentMovie.director}</p>
             <p>Date of release: #{movieController.currentMovie.dateOfRelease}</p>
-            <c:forEach var="review" items="#{movieController.getReviews(movieController.currentMovie.id)}">
+            <c:forEach var="review" items="#{movieController.getReviewsSortByStars(movieController.currentMovie.id)}">
+                <p>Stars: #{review.stars}</p>
+                <p>Review: #{review.review}</p>
+                <p>Author: #{review.user.username}</p>
+                <p>Date reviewed: #{review.dateWritten}</p>
+            </c:forEach>
+            <c:forEach var="review" items="#{movieController.getReviewsSortByDate(movieController.currentMovie.id)}">
                 <p>Stars: #{review.stars}</p>
                 <p>Review: #{review.review}</p>
                 <p>Author: #{review.user.username}</p>

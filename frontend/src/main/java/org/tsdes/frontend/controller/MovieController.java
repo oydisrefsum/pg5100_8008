@@ -42,8 +42,12 @@ public class MovieController implements Serializable {
         return "/ui/details.jsf?faces-redirect=true";
     }
 
-    public List<Review> getReviews(Long movieId){
+    public List<Review> getReviewsSortByStars(Long movieId){
         return movieService.getReviewsSortedByStars(movieId);
+    }
+
+    public List<Review> getReviewsSortByDate(Long movieId){
+        return movieService.getReviewSortedByDate(movieId);
     }
 
     public Movie getCurrentMovie(){
