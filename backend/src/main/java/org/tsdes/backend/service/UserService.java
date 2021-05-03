@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tsdes.backend.entity.Movie;
+import org.tsdes.backend.entity.Review;
 import org.tsdes.backend.entity.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by arcuri82 on 13-Dec-17.
@@ -55,4 +59,5 @@ public class UserService {
         }
         return user;
     }
+
 }

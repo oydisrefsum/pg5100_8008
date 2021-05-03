@@ -22,7 +22,7 @@ public class IndexPO extends LayoutPO {
 
     @Override
     public boolean isOnPage() {
-        return getDriver().getTitle().contains("Travel Guide");
+        return getDriver().getTitle().contains("Movie Guide");
     }
 
     /*public MatchPO startNewMatch(){

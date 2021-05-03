@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,8 +27,9 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-    @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<User> users;
+/*    @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)*/
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Review> reviews = new ArrayList<>();
 
     public String getTitle() {
         return title;
@@ -62,5 +64,12 @@ public class Movie {
         this.dateOfRelease = dateOfRelease;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Review review) {
+        this.reviews.add(review);
+    }
 }
 

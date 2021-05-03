@@ -34,7 +34,6 @@ public class DefaultDataInitializerService {
         attempt(() -> movieService.createMovie("Gravity", "Alfonso Cuaron", LocalDate.of(2013, Month.NOVEMBER, 8)));
         attempt(() -> movieService.createMovie("Shaun of the Dead", "Edgar Wright", LocalDate.of(2004, Month.SEPTEMBER, 3)));
         attempt(() -> movieService.createMovie("Snowpiercer", "Joon-ho Bong", LocalDate.of(2013, Month.JULY, 29)));
-        attempt(() -> movieService.createMovie("Lock, Stock, and Two Smoking Barrels", "Guy Richie", LocalDate.of(1999, Month.FEBRUARY, 26)));
         attempt(() -> movieService.createMovie("North by Northwest", "Alfred Hitchcock", LocalDate.of(1959, Month.JULY, 1)));
         attempt(() -> movieService.createMovie("Blue Velvet", "David Lynch", LocalDate.of(2007, Month.SEPTEMBER, 21)));
 

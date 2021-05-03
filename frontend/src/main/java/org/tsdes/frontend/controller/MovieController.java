@@ -1,11 +1,10 @@
 package org.tsdes.frontend.controller;
-/*
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tsdes.backend.entity.Purchase;
-import org.tsdes.backend.entity.Trip;
+import org.tsdes.backend.entity.Movie;
 import org.tsdes.backend.entity.User;
-import org.tsdes.backend.service.TripService;
+import org.tsdes.backend.service.MovieService;
 import org.tsdes.backend.service.UserService;
 
 import javax.enterprise.context.SessionScoped;
@@ -16,10 +15,10 @@ import java.util.List;
 
 @Named
 @SessionScoped
-public class TripController implements Serializable {
+public class MovieController implements Serializable {
 
     @Autowired
-    private TripService tripService;
+    private MovieService movieService;
 
     @Autowired
     private UserInfoController infoController;
@@ -27,7 +26,13 @@ public class TripController implements Serializable {
     @Autowired
     private UserService userService;
 
+    private Movie currentMovie;
 
+    public List<Movie> getAllMovies(){
+        return movieService.getAllMovies();
+    }
+
+/*
     private List<Trip> trips;
 
     private Trip currentTrip;
@@ -87,5 +92,6 @@ public class TripController implements Serializable {
     public List<Purchase> getBookedTrips(){
         return tripService.getAllPurchases(infoController.getUserName());
     }
+    */
 }
-*/
+

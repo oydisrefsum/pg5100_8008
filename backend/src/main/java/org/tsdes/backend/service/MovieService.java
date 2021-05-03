@@ -69,6 +69,10 @@ public class MovieService {
         review.setStars(stars);
 
         em.persist(review);
+
+        user.setReviews(review);
+
+        movie.setReviews(review);
         return review.getId();
     }
 

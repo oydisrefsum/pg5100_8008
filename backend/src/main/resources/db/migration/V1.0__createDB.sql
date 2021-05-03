@@ -42,4 +42,9 @@ create table review
 alter table movie_users add constraint FKcrnfc5k5lxdfurq3b97o52dnv foreign key (movie_id) references movie;
 alter table user_movies add constraint UK_812qgr2woxiu6e0776qiioy12 foreign key (user_username) references user;
 alter table user_movies add constraint FK6qbykpe0c8j68iwgm77hjtvhp foreign key (movies_id) references movie;*/
+/*
+
+alter table review add constraint FK6qbykpe0c8j68iwgm77hjtvhp foreign key (user_username) references user;
+alter table review add constraint UK_812qgr2woxiu6e0776qiioy12 foreign key (movie_id) references movie;
+*/
 

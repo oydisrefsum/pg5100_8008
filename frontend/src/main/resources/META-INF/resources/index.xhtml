@@ -10,13 +10,21 @@
 <ui:composition template="/layout.xhtml">
 
     <ui:define name="title">
-        Travel Guide
+        Movie Guide
     </ui:define>
 
 
     <ui:define name="content">
 
-        <h2>Travel Guide</h2>
+        <h2>Movie Guide</h2>
+
+        <c:forEach var="movie" items="#{movieController.allMovies}">
+            <div id="search">
+                <p>#{movie.title}</p>
+                <p>#{movie.director}</p>
+                <p>#{movie.dateOfRelease}</p>
+            </div>
+        </c:forEach>
 
         <!--<h6>Search by location, sorted by least expencive to most expencive</h6>
         <h:form id="createForm">
@@ -57,6 +65,7 @@
         </c:forEach>-->
 
         <sec:anonymous>
+            <br/>
             Log in to book your new destination!
         </sec:anonymous>
 

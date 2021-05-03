@@ -2,6 +2,7 @@ package org.tsdes.backend.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,13 +28,8 @@ public class User {
     @NotNull
     private Boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "REVIEW",
-            joinColumns = {@JoinColumn(name = "user_username")},
-            inverseJoinColumns = {@JoinColumn(name = "movie_id")}
-    )
-    private List<Movie> movies;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<Review> reviews = new ArrayList<>();
 
 
     public User() {
@@ -88,4 +84,11 @@ public class User {
         this.email = email;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Review review) {
+        reviews.add(review);
+    }
 }
