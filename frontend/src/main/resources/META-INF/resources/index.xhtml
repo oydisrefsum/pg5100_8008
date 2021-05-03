@@ -19,12 +19,16 @@
         <h2>Movie Guide</h2>
 
         <c:forEach var="movie" items="#{movieController.allMovies}">
+            <h:form prependId="false">
             <div id="search">
-                <p>#{movie.title}</p>
+                <h:commandButton action="#{movieController.details(movie.id)}"
+                                 value="#{movie.title}"
+                                 class="movies"/>
                 <p>#{movie.director}</p>
                 <p>#{movie.dateOfRelease}</p>
                 <p>#{movieController.getAverageStars(movie.id)}</p>
             </div>
+            </h:form>
         </c:forEach>
 
         <!--<h6>Search by location, sorted by least expencive to most expencive</h6>

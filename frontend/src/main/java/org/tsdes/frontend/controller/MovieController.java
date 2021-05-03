@@ -36,6 +36,14 @@ public class MovieController implements Serializable {
 
         return movieService.averageStars(movieId);
     }
+    public String details(Long id){
+
+        currentMovie = movieService.getMovieWithId(id);
+
+        return "/ui/details.jsf?faces-redirect=true";
+    }
+
+
 
 /*
     private List<Trip> trips;
