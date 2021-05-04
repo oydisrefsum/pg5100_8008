@@ -28,7 +28,7 @@ public class MovieServiceTest extends ServiceTestBase {
     UserService userService;
 
     @Test
-    public void testNoExistingTrips() {
+    public void testNoExistingMovies() {
 
         List<Movie> list = movieService.getAllMovies();
         assertEquals(0, list.size());
