@@ -4,7 +4,7 @@ package org.tsdes.selenium.po;
 import org.tsdes.selenium.PageObject;
 
 /**
- * Created by arcuri82 on 12-Feb-18.
+ * Copied from file in repo https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/frontend/src/test/java/org/tsdes/intro/exercises/quizgame/selenium/po/SignUpPO.java
  */
 public class SignUpPO extends LayoutPO{
 

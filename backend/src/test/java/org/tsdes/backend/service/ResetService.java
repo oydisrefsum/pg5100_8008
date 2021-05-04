@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-//File copied and adapted from repo https://github.com/arcuri82/testing_security_development_enterprise_systems
+
 /**
- * Created by arcuri82 on 14-Dec-17.
+ * File adapted from file in repo https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/backend/src/test/java/org/tsdes/intro/exercises/quizgame/backend/service/ResetService.java
  */
 @Service
 @Transactional
@@ -20,13 +20,11 @@ public class ResetService {
     private EntityManager em;
 
     public void resetDatabase(){
-        //Have to use native SQL for ElementCollection
 
         deleteEntities(User.class);
         deleteEntities(Movie.class);
         deleteEntities(Review.class);
-/*        deleteEntities(Trip.class);
-        deleteEntities(Purchase.class);*/
+
     }
 
     private void deleteEntities(Class<?> entity){
@@ -36,15 +34,6 @@ public class ResetService {
         }
 
         String name = entity.getSimpleName();
-
-        /*
-            Note: we passed as input a Class<?> instead of a String to
-            avoid SQL injection. However, being here just test code, it should
-            not be a problem. But, as a good habit, always be paranoiac about
-            security, above all when you have code that can delete the whole
-            database...
-         */
-
         Query query = em.createQuery("delete from " + name);
         query.executeUpdate();
     }

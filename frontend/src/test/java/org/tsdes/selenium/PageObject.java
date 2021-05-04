@@ -11,7 +11,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Adapted from file in repo https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/frontend/src/test/java/org/tsdes/intro/exercises/quizgame/selenium/PageObject.java
+ */
 public abstract class PageObject {
 
     protected final WebDriver driver;
@@ -19,10 +21,6 @@ public abstract class PageObject {
     protected final int port;
 
     private static final AtomicLong counter = new AtomicLong(System.currentTimeMillis());
-
-    public static String getUniqueId() {
-        return "foo" + counter.incrementAndGet();
-    }
 
     public PageObject(WebDriver driver, String host, int port) {
         this.driver = driver;
@@ -52,10 +50,6 @@ public abstract class PageObject {
         driver.get("http://" + host + ":" + port);
     }
 
-    public void refresh(){
-        driver.navigate().refresh();
-    }
-
     public void clickAndWait(String id){
         WebElement element = driver.findElement(By.id(id));
         element.click();
@@ -66,12 +60,6 @@ public abstract class PageObject {
 
     public String getText(String id){
         return driver.findElement(By.id(id)).getText();
-    }
-
-    public int getInteger(String id){
-        String text = getText(id);
-
-        return Integer.parseInt(text);
     }
 
     public void setText(String id, String text){

@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Created by arcuri82 on 02-Feb-18.
+ * adapted from file in repo https://github.com/arcuri82/testing_security_development_enterprise_systems/blob/master/intro/exercise-solutions/quiz-game/part-11/frontend/src/test/java/org/tsdes/intro/exercises/quizgame/selenium/SeleniumDriverHandler.java
  */
 public class SeleniumDriverHandler {
 
@@ -38,13 +38,6 @@ public class SeleniumDriverHandler {
     }
 
     public static WebDriver getChromeDriver() {
-
-        /*
-            Need to have Chrome (eg version 53.x) and the Chrome Driver (eg 2.24),
-            whose executable should be saved directly under your home directory
-
-            see https://sites.google.com/a/chromium.org/chromedriver/getting-started
-         */
 
         boolean OK = setupDriverExecutable("chromedriver", "webdriver.chrome.driver");
         if(! OK){

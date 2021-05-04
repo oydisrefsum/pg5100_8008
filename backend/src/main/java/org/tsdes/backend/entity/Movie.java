@@ -27,7 +27,6 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-/*    @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)*/
     @OneToMany(mappedBy = "movie", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Review> reviews = new ArrayList<>();
 
