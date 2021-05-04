@@ -4,9 +4,9 @@ package org.tsdes.selenium;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.tsdes.selenium.po.IndexPO;
 import org.tsdes.selenium.po.SignUpPO;
+import org.tsdes.selenium.po.ui.DetailsPO;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -89,81 +89,33 @@ public abstract class SeleniumTestBase {
         assertTrue(home.checkMovieList() > 2);
     }
 
-    /*@Test
-    public void testNewMatch() {
+    @Test
+    public void testWriteReview() throws Exception {
+        String movieId = home.getMovieIds().get(2);
+
+        assertTrue(home.catSelectMovies());
+
+        DetailsPO po = home.chooseAMovie(movieId);
+        assertFalse(home.catSelectMovies());
+
+        assertTrue(po.checkForUnAuthorizedToWriteReview());
 
         createNewUser(getUniqueId(), "123");
 
-        MatchPO po = home.startNewMatch();
-        assertTrue(po.canSelectCategory());
-    }*/
+        DetailsPO po1 = home.chooseAMovie(movieId);
+        assertFalse(home.catSelectMovies());
 
-    /*@Test
-    public void testFirstQuiz() {
+        assertFalse(po1.checkForUnAuthorizedToWriteReview());
 
-        createNewUser(getUniqueId(), "123");
+        po1.writeAReview("Good! from test", "5");
+        Thread.sleep(2000);
+        assertTrue(po1.readReview("Good! from test"));
 
-        MatchPO po = home.startNewMatch();
-        String ctgId = po.getCategoryIds().get(0);
+        po1.doLogout();
 
-        assertTrue(po.canSelectCategory());
-        assertFalse(po.isQuestionDisplayed());
+        home.chooseAMovie(movieId);
+        assertTrue(po1.readReview("Good! from test"));
 
-        po.chooseCategory(ctgId);
-        assertFalse(po.canSelectCategory());
-        assertTrue(po.isQuestionDisplayed());
+    }
 
-        assertEquals(1, po.getQuestionCounter());
-    }*/
-
-    /*@Test
-    public void testWrongAnswer() {
-
-        createNewUser(getUniqueId(), "123");
-
-        MatchPO matchPO = home.startNewMatch();
-        String ctgId = matchPO.getCategoryIds().get(0);
-
-        matchPO.chooseCategory(ctgId);
-
-        long quizId = matchPO.getQuizId();
-
-        int rightAnswer = quizService.getQuiz(quizId).getIndexOfCorrectAnswer();
-        int wrongAnswer = (rightAnswer + 1) % 4;
-
-        ResultPO resultPO = matchPO.answerQuestion(wrongAnswer);
-        assertNotNull(resultPO);
-
-        assertTrue(resultPO.haveLost());
-        assertFalse(resultPO.haveWon());
-    }*/
-
-    /*@Test
-    public void testWinAMatch() {
-
-        createNewUser(getUniqueId(), "123");
-
-        MatchPO matchPO = home.startNewMatch();
-        String ctgId = matchPO.getCategoryIds().get(0);
-        matchPO.chooseCategory(ctgId);
-
-        ResultPO resultPO = null;
-
-        for (int i = 1; i <= 5; i++) {
-            assertTrue(matchPO.isQuestionDisplayed());
-            assertEquals(i, matchPO.getQuestionCounter());
-
-            long quizId = matchPO.getQuizId();
-            int rightAnswer = quizService.getQuiz(quizId).getIndexOfCorrectAnswer();
-
-            resultPO = matchPO.answerQuestion(rightAnswer);
-
-            if (i != 5) {
-                assertNull(resultPO);
-            }
-        }
-
-        assertTrue(resultPO.haveWon());
-        assertFalse(resultPO.haveLost());
-    }*/
 }

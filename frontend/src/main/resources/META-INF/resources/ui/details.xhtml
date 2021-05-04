@@ -4,6 +4,7 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        xmlns:sec="http://www.springframework.org/security/tags"
         xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 >
 
@@ -32,22 +33,28 @@
             </h:form>
             <c:forEach var="review" items="#{movieController.getReview(movieController.currentMovie.id)}">
                 <p>Stars: #{review.stars}</p>
-                <p>Review: #{review.review}</p>
+                <p id="reviewId">Review: #{review.review}</p>
                 <p>Author: #{review.user.username}</p>
                 <p>Date reviewed: #{review.dateWritten}</p>
             </c:forEach>
         </div>
 
+        <sec:anonymous>
+            <p id="anonymousDetail">Log in to write your own review!</p>
+
+        </sec:anonymous>
+
+        <sec:authenticated>
         <div class="details">
             <h3>Add your own review</h3>
             <h3>#{movieController.errorMsg}</h3>
-            <h:form id="createForms">
-                <p>Text: </p><h:inputTextarea value="#{movieController.reviewText}" id="createText"/>
-                <p>Stars: </p><h:inputTextarea value="#{movieController.stars}" id="createTextt"/>
-                <h:commandButton value="Give your review!" action="#{movieController.addAReview}" styleClass="btn"/>
+            <h:form id="createForms" prependId="false">
+                <p>Text: </p><h:inputTextarea value="#{movieController.reviewText}" id="addReviewText"/>
+                <p>Stars: </p><h:inputTextarea value="#{movieController.stars}" id="addStars"/>
+                <h:commandButton value="Give your review!" action="#{movieController.addAReview}" styleClass="btn" id="addReviewBtn"/>
             </h:form>
         </div>
-
+    </sec:authenticated>
 
     </ui:define>
 
