@@ -82,6 +82,13 @@ public abstract class SeleniumTestBase {
         assertFalse(home.getDriver().getPageSource().contains(username));
     }
 
+    @Test
+    public void testDefaultMovies() {
+
+        createNewUser(getUniqueId(), "123");
+        assertTrue(home.checkMovieList() > 2);
+    }
+
     /*@Test
     public void testNewMatch() {
 

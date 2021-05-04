@@ -10,19 +10,19 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class MatchPO extends LayoutPO {
+public class MoviePO extends LayoutPO {
 
 
-    public MatchPO(PageObject other) {
+    public MoviePO(PageObject other) {
         super(other);
     }
 
     @Override
     public boolean isOnPage() {
-        return getDriver().getTitle().trim().equalsIgnoreCase("Match");
+        return getDriver().getTitle().trim().equalsIgnoreCase("Movie Guide");
     }
 
-    public boolean canSelectCategory(){
+    /*public boolean canSelectCategory(){
 
         return getCategoryIds().size() > 0;
     }
@@ -51,7 +51,7 @@ public class MatchPO extends LayoutPO {
     public long getQuizId(){
         String id = getDriver().findElement(By.xpath("//*[@data-quizid]")).getAttribute("data-quizid");
         return Long.parseLong(id);
-    }
+    }*/
 
     /*public ResultPO answerQuestion(int index){
 

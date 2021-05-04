@@ -1,5 +1,6 @@
 package org.tsdes.selenium.po;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.tsdes.selenium.PageObject;
 
@@ -25,6 +26,10 @@ public class IndexPO extends LayoutPO {
         return getDriver().getTitle().contains("Movie Guide");
     }
 
+
+    public int checkMovieList() {
+        return getDriver().findElements(By.className("movies")).size();
+    }
     /*public MatchPO startNewMatch(){
 
         clickAndWait("newMatchBtnId");
