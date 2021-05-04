@@ -17,12 +17,12 @@ public class User {
 
     private String lastname;
 
-    @NotNull
+    @NotBlank
     @Column(unique=true)
     @Email
     private String email;
 
-    @NotNull
+    @NotBlank
     private String password;
 
     @NotNull

@@ -1,7 +1,5 @@
 package org.tsdes.backend.entity;
 
-import org.hibernate.validator.constraints.Range;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;

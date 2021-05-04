@@ -35,13 +35,13 @@ public abstract class SeleniumTestBase {
     private IndexPO home;
 
 
-    private IndexPO createNewUser(String username, String password) {
+    private IndexPO createNewUser(String username, String password, String email) {
 
         home.toStartingPage();
 
         SignUpPO signUpPO = home.toSignUp();
 
-        IndexPO indexPO = signUpPO.createUser(username, password);
+        IndexPO indexPO = signUpPO.createUser(username, password, email);
         assertNotNull(indexPO);
 
         return indexPO;
@@ -66,7 +66,8 @@ public abstract class SeleniumTestBase {
 
         String username = getUniqueId();
         String password = "123456789";
-        home = createNewUser(username, password);
+        String email = "test@mail.com";
+        home = createNewUser(username, password, email);
 
         assertTrue(home.isLoggedIn());
         assertTrue(home.getDriver().getPageSource().contains(username));
@@ -80,7 +81,7 @@ public abstract class SeleniumTestBase {
     @Test
     public void testDefaultMovies() {
 
-        createNewUser(getUniqueId(), "123");
+        createNewUser(getUniqueId(), "123", getUniqueId() + "@mail.com");
         assertTrue(home.checkMovieList() > 2);
     }
 
@@ -95,7 +96,7 @@ public abstract class SeleniumTestBase {
 
         assertTrue(po.checkForUnAuthorizedToWriteReview());
 
-        createNewUser(getUniqueId(), "123");
+        createNewUser(getUniqueId(), "123", getUniqueId() + "@mail.com");
 
         DetailsPO po1 = home.chooseAMovie(movieId);
         assertFalse(home.canSelectMovies());
@@ -121,7 +122,7 @@ public abstract class SeleniumTestBase {
 
         assertEquals("1/5" ,home.getStarsForAMovie(movieId));
 
-        createNewUser(getUniqueId(), "123");
+        createNewUser(getUniqueId(), "123", getUniqueId() + "@mail.com");
         DetailsPO po = home.chooseAMovie(movieId);
         assertFalse(home.canSelectMovies());
         po.writeAReview("Excellent", "5");
@@ -142,21 +143,21 @@ public abstract class SeleniumTestBase {
 
         assertTrue(home.canSelectMovies());
 
-        createNewUser(getUniqueId(), "123");
+        createNewUser(getUniqueId(), "123", getUniqueId() + "@mail.com");
         DetailsPO po = home.chooseAMovie(movieId);
         assertFalse(home.canSelectMovies());
         po.writeAReview("very bad", "1");
 
         po.doLogout();
 
-        createNewUser(getUniqueId(), "123");
+        createNewUser(getUniqueId(), "123", getUniqueId() + "@mail.com");
         DetailsPO po1 = home.chooseAMovie(movieId);
         assertFalse(home.canSelectMovies());
         po1.writeAReview("its ok", "3");
 
         po1.doLogout();
 
-        createNewUser(getUniqueId(), "123");
+        createNewUser(getUniqueId(), "123", getUniqueId() + "@mail.com");
         DetailsPO po2 = home.chooseAMovie(movieId);
         assertFalse(home.canSelectMovies());
         po2.writeAReview("very good", "5");
