@@ -29,48 +29,10 @@
                                  id="movieBtnId_#{movie.id}"/>
                 <p>#{movie.director}</p>
                 <p>#{movie.dateOfRelease}</p>
-                <p>#{movieController.getAverageStars(movie.id)}</p>
+                <p id="movieStarsId_#{movie.id}">#{movieController.getAverageStars(movie.id)}</p>
             </div>
             </h:form>
         </c:forEach>
-
-        <!--<h6>Search by location, sorted by least expencive to most expencive</h6>
-        <h:form id="createForm">
-            <h:inputTextarea value="#{tripController.formText}" id="createText"/>
-            <h:commandButton value="Search!" action="#{tripController.setSearchedTrips}" id="createButton"/>
-        </h:form>
-
-        <c:if test="#{tripController.getSearchedTrips().size() == 0}">
-            <h3>No searched match this result</h3>
-        </c:if>
-
-        <c:forEach var="trip" items="#{tripController.getSearchedTrips()}">
-            <div id="search">
-            <p>#{trip.title}</p>
-            <p>#{trip.location}</p>
-            <p>#{trip.cost}</p>
-            </div>
-        </c:forEach>
-
-        <p>Top 5 travel Destinations</p>
-
-        <c:forEach var="trip" items="#{tripController.getTrips(5)}">
-            <h:form prependId="false">
-                <h:commandButton action="#{tripController.details(trip.id)}"
-                        value="#{trip.title}"
-                        class="travels"/>
-                <p>#{trip.description}</p>
-                <p>Price: #{trip.cost}</p>
-                <p>DepartureTime: #{trip.dateOfDeparture}</p>
-                <p>Location: #{trip.location}</p>
-            </h:form>
-
-            <sec:authenticated>
-
-                <p>Book your trip today!</p>
-
-            </sec:authenticated>
-        </c:forEach>-->
 
         <sec:anonymous>
             <br/>

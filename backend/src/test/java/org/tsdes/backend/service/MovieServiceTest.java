@@ -85,7 +85,7 @@ public class MovieServiceTest extends ServiceTestBase {
 
         movieService.rateAMovie(movie, user, "very good", 5, LocalDate.of(2016, Month.JUNE, 25));
 
-        assertEquals("3",movieService.averageStars(movieId));
+        assertEquals("3/5",movieService.averageStars(movieId));
     }
 
     @Test
@@ -137,8 +137,8 @@ public class MovieServiceTest extends ServiceTestBase {
 
         System.out.println(movies.size());
 
-        assertEquals("5", movieService.averageStars(movies.get(0).getId()));
-        assertEquals("1", movieService.averageStars(movies.get(3).getId()));
+        assertEquals("5/5", movieService.averageStars(movies.get(0).getId()));
+        assertEquals("1/5", movieService.averageStars(movies.get(3).getId()));
     }
 
     @Test

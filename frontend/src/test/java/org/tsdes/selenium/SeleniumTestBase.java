@@ -23,9 +23,6 @@ public abstract class SeleniumTestBase {
     protected abstract int getServerPort();
 
 
-   /* @Autowired
-    private QuizService quizService;*/
-
     private static final AtomicInteger counter = new AtomicInteger(0);
 
     private String getUniqueId() {
@@ -51,10 +48,6 @@ public abstract class SeleniumTestBase {
     @BeforeEach
     public void initTest() {
 
-        /*
-            we want to have a new session, otherwise the tests
-            will share the same Session beans
-         */
         getDriver().manage().deleteAllCookies();
 
         home = new IndexPO(getDriver(), getServerHost(), getServerPort());
@@ -90,7 +83,7 @@ public abstract class SeleniumTestBase {
     }
 
     @Test
-    public void testWriteReview() throws Exception {
+    public void testWriteReview(){
         String movieId = home.getMovieIds().get(2);
 
         assertTrue(home.catSelectMovies());
@@ -108,13 +101,36 @@ public abstract class SeleniumTestBase {
         assertFalse(po1.checkForUnAuthorizedToWriteReview());
 
         po1.writeAReview("Good! from test", "5");
-        Thread.sleep(2000);
         assertTrue(po1.readReview("Good! from test"));
 
         po1.doLogout();
 
         home.chooseAMovie(movieId);
         assertTrue(po1.readReview("Good! from test"));
+
+    }
+
+    @Test
+    public void testStars(){
+
+        String movieId = home.getMovieIds().get(6);
+
+        assertTrue(home.catSelectMovies());
+
+        assertEquals("1/5" ,home.getStarsForAMovie(movieId));
+
+        createNewUser(getUniqueId(), "123");
+        DetailsPO po = home.chooseAMovie(movieId);
+        assertFalse(home.catSelectMovies());
+        po.writeAReview("Excellent", "5");
+
+        assertTrue(po.readReview("Excellent"));
+
+        po.doLogout();
+
+        assertTrue(home.catSelectMovies());
+        assertEquals("2/5" ,home.getStarsForAMovie(movieId));
+
 
     }
 

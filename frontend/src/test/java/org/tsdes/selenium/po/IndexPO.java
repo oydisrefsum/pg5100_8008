@@ -55,21 +55,9 @@ public class IndexPO extends LayoutPO {
         return po;
     }
 
-    public void goToDetailsAboutMovie(){
+    public String getStarsForAMovie(String id){
 
-
-        /*DetailsPO po = new DetailsPO(this);
-        assertTrue(po.isOnPage());
-
-        return po;*/
-
+        return getText("movieStarsId_"+id);
     }
-    /*public MatchPO startNewMatch(){
 
-        clickAndWait("newMatchBtnId");
-        MatchPO po = new MatchPO(this);
-        assertTrue(po.isOnPage());
-
-        return po;
-    }*/
 }
