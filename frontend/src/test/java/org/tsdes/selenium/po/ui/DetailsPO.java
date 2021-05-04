@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.tsdes.selenium.PageObject;
 import org.tsdes.selenium.po.LayoutPO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class DetailsPO extends LayoutPO {
 
@@ -33,6 +36,30 @@ public class DetailsPO extends LayoutPO {
     public boolean readReview(String reviewText){
         System.out.println(getText("reviewId"));
         return getText("reviewId").equals("Review: " +reviewText);
+    }
+
+    public void sortByTime(){
+        clickAndWait("seeByTime");
+    }
+
+    public void sortByStars(){
+        clickAndWait("seeByStars");
+    }
+
+    public String readStarsInReview(String id){
+        return getText("starsId_" + id);
+    }
+
+    public boolean canGetReviewIds(){
+        return getReviewIds().size() > 0;
+    }
+
+    public List<String> getReviewIds(){
+
+        return getDriver().findElements(By.xpath("//span[@data-reviewid]"))
+                .stream()
+                .map(e -> e.getAttribute("data-reviewid"))
+                .collect(Collectors.toList());
     }
 
 

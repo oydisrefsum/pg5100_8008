@@ -86,17 +86,17 @@ public abstract class SeleniumTestBase {
     public void testWriteReview(){
         String movieId = home.getMovieIds().get(2);
 
-        assertTrue(home.catSelectMovies());
+        assertTrue(home.canSelectMovies());
 
         DetailsPO po = home.chooseAMovie(movieId);
-        assertFalse(home.catSelectMovies());
+        assertFalse(home.canSelectMovies());
 
         assertTrue(po.checkForUnAuthorizedToWriteReview());
 
         createNewUser(getUniqueId(), "123");
 
         DetailsPO po1 = home.chooseAMovie(movieId);
-        assertFalse(home.catSelectMovies());
+        assertFalse(home.canSelectMovies());
 
         assertFalse(po1.checkForUnAuthorizedToWriteReview());
 
@@ -115,21 +115,62 @@ public abstract class SeleniumTestBase {
 
         String movieId = home.getMovieIds().get(6);
 
-        assertTrue(home.catSelectMovies());
+        assertTrue(home.canSelectMovies());
 
         assertEquals("1/5" ,home.getStarsForAMovie(movieId));
 
         createNewUser(getUniqueId(), "123");
         DetailsPO po = home.chooseAMovie(movieId);
-        assertFalse(home.catSelectMovies());
+        assertFalse(home.canSelectMovies());
         po.writeAReview("Excellent", "5");
 
         assertTrue(po.readReview("Excellent"));
 
         po.doLogout();
 
-        assertTrue(home.catSelectMovies());
+        assertTrue(home.canSelectMovies());
         assertEquals("2/5" ,home.getStarsForAMovie(movieId));
+
+
+    }
+
+    @Test
+    public void testSorting() throws InterruptedException {
+        String movieId = home.getMovieIds().get(5);
+
+        assertTrue(home.canSelectMovies());
+
+        createNewUser(getUniqueId(), "123");
+        DetailsPO po = home.chooseAMovie(movieId);
+        assertFalse(home.canSelectMovies());
+        po.writeAReview("very bad", "1");
+
+        po.doLogout();
+
+        createNewUser(getUniqueId(), "123");
+        DetailsPO po1 = home.chooseAMovie(movieId);
+        assertFalse(home.canSelectMovies());
+        po1.writeAReview("its ok", "3");
+
+        po1.doLogout();
+
+        createNewUser(getUniqueId(), "123");
+        DetailsPO po2 = home.chooseAMovie(movieId);
+        assertFalse(home.canSelectMovies());
+        po2.writeAReview("very good", "5");
+
+
+        po2.sortByStars();
+
+        assertTrue(po2.canGetReviewIds());
+        assertEquals("Stars: 5", po2.readStarsInReview(po.getReviewIds().get(0)));
+
+        po2.sortByTime();
+
+        assertEquals("Stars: 1", po2.readStarsInReview(po.getReviewIds().get(0)));
+
+
+
 
 
     }

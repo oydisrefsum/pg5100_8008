@@ -25,18 +25,19 @@
         <p>Details about #{movieController.currentMovie.title}</p>
             <p>Director: #{movieController.currentMovie.director}</p>
             <p>Date of release: #{movieController.currentMovie.dateOfRelease}</p>
-            <h:form id="createForm">
+            <h:form id="seeByStars" prependId="false">
                 <h:commandButton value="See Reviews rated by stars" action="#{movieController.setSeeByStars}" styleClass="btn"/>
             </h:form>
-            <h:form id="createFormm">
+            <h:form id="seeByTime" prependId="false">
                 <h:commandButton value="See Reviews rated by date written" action="#{movieController.setSeeByDate}" styleClass="btn"/>
             </h:form>
-            <c:forEach var="review" items="#{movieController.getReview(movieController.currentMovie.id)}">
-                <p>Stars: #{review.stars}</p>
+            <c:forEach var="review" items="#{movieController.getReview(movieController.currentMovie.id)}" >
+                <h:outputText p:data-reviewid = "#{review.id}">Review by user</h:outputText>
+                <p id="starsId_#{review.id}" >Stars: #{review.stars}</p>
                 <p id="reviewId">Review: #{review.review}</p>
                 <p>Author: #{review.user.username}</p>
                 <p>Date reviewed: #{review.dateWritten}</p>
-            </c:forEach>
+            </c:forEach >
         </div>
 
         <sec:anonymous>

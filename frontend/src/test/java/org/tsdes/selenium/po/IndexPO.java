@@ -35,7 +35,7 @@ public class IndexPO extends LayoutPO {
         return getDriver().findElements(By.className("movies")).size();
     }
 
-    public boolean catSelectMovies(){
+    public boolean canSelectMovies(){
         return getMovieIds().size() > 0;
     }
     public List<String> getMovieIds(){
