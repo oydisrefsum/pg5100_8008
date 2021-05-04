@@ -87,7 +87,7 @@ public class MovieService {
             return "This movie has no reviews yet";
         }
         int average = (stars/query.getResultList().size());
-        return Integer.toString(average);
+        return average + "/5";
 
     }
 
