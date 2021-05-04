@@ -37,6 +37,10 @@ public class MovieController implements Serializable {
 
     private String stars;
 
+    private String errorMsg;
+
+    private boolean showError;
+
     public List<Movie> getAllMovies(){
         return movieService.getAllMovies();
     }
@@ -46,6 +50,10 @@ public class MovieController implements Serializable {
         return movieService.averageStars(movieId);
     }
     public String details(Long id){
+        errorMsg = "";
+        showError = false;
+        stars = "";
+        reviewText = "";
 
         currentMovie = movieService.getMovieWithId(id);
 
@@ -79,15 +87,24 @@ public class MovieController implements Serializable {
     public void addAReview(){
 
         User user = userService.getUserWithId(infoController.getUserName());
-//check here for info om brukeren har reviewet filmen før
-
         for (Review review : movieService.getReviewSortedByDate(currentMovie.getId())){
             if(review.getUser().getUsername().equals(user.getUsername())){
-                System.out.println("this user ha already reviewed this movie");
+                setErrorMsg("You have already reviewed this movie");
             }
         }
+        if(!showError){
+            if(parseInt(stars) < 1 || parseInt(stars) > 5){
+                setErrorMsg("Stars can only be between 1 and 5");
+                stars = "";
+                showError = false;
+                return;
 
-        movieService.rateAMovie(currentMovie, user, reviewText, parseInt(stars), LocalDate.now());
+            }
+            movieService.rateAMovie(currentMovie, user, reviewText, parseInt(stars), LocalDate.now());
+            stars = "";
+            reviewText = "";
+            showError = false;
+        }
     }
 
     public String getReviewText() {
@@ -106,6 +123,16 @@ public class MovieController implements Serializable {
     public void setStars(String stars) {
         this.stars = "";
         this.stars = stars;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = "";
+        showError = true;
+        this.errorMsg = errorMsg;
     }
 
 
