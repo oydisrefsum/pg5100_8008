@@ -1,4 +1,4 @@
-# Exam enterpirse 1
+# Exam enterprise 1
 
 start application for testing/debugging from LocalRunnerApplication found in frontend/src/test/java/org.tsdes/
 
